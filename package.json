@@ -1,10 +1,10 @@
 {
-  "name": "tailwindcss-aspect-ratio",
-  "version": "3.0.0",
+  "name": "tailwindcss-aspect-ratio-pseudo",
+  "version": "1.0.0",
   "description": "Tailwind CSS plugin to generate aspect ratio utilities",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/webdna/tailwindcss-aspect-ratio.git"
+    "url": "git+https://github.com/Cybolic/tailwindcss-aspect-ratio-pseudo.git"
   },
   "keywords": [
     "tailwind",
@@ -14,8 +14,8 @@
   ],
   "author": "webdna",
   "license": "MIT",
-  "bugs": "https://github.com/webdna/tailwindcss-aspect-ratio/issues",
-  "homepage": "https://github.com/webdna/tailwindcss-aspect-ratio",
+  "bugs": "https://github.com/Cybolic/tailwindcss-aspect-ratio-pseudo/issues",
+  "homepage": "https://github.com/Cybolic/tailwindcss-aspect-ratio-pseudo",
   "scripts": {
     "test": "jest",
     "release": "f(){ release-it $1 && github-release-from-changelog ;};f"

@@ -1,5 +1,7 @@
 # Aspect Ratio Plugin for Tailwind CSS (pseudo-element version)
 
+Based on [tailwindcss-aspect-ratio](https://github.com/webdna/tailwindcss-aspect-ratio). Re-written to use pseudo-elements and support the minimum-height-aspect-ratio trick.
+
 ## Requirements
 
 This plugin requires Tailwind CSS 1.2 or later. If your project uses an older version of Tailwind, you should install the latest 2.x version of this plugin (`npm install tailwindcss-aspect-ratio@2.x`).
@@ -30,7 +32,7 @@ module.exports = {
     aspectRatio: ['responsive'], // defaults to ['responsive']
   },
   plugins: [
-    require('tailwindcss-aspect-ratio'),
+    require('tailwindcss-aspect-ratio-pseudo'),
   ],
 };
 ```
@@ -40,19 +42,53 @@ The `aspectRatio` theme object is a dictionary where the key is the suffix of th
 The above configuration would create the following classes, as well as their responsive variants:
 
 ```css
-.aspect-ratio-none {
+  .aspect-ratio {
+    position: relative
+  }
+
+  .aspect-ratio::before {
+    content: "";
+    display: block
+  }
+
+  .aspect-ratio > :first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%
+  }
+
+  .aspect-ratio > img {
+    height: auto
+  }
+
+  .min-h-aspect-ratio::before {
+    content: "";
+    width: 1px;
+    margin-left: -1px;
+    float: left;
+    height: 0
+  }
+
+  .min-h-aspect-ratio::after {
+    content: "";
+    display: table;
+    clear: both
+  }
+.aspect-ratio-none::before {
   padding-bottom: 0;
 }
-.aspect-ratio-square {
+.aspect-ratio-square::before {
   padding-bottom: 100%;
 }
-.aspect-ratio-16\/9 {
+.aspect-ratio-16\/9::before {
   padding-bottom: 56.25%;
 }
-.aspect-ratio-4\/3 {
+.aspect-ratio-4\/3::before {
   padding-bottom: 75%;
 }
-.aspect-ratio-21\/9 {
+.aspect-ratio-21\/9::before {
   padding-bottom: 42.86%;
 }
 ```
