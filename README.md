@@ -1,4 +1,4 @@
-# Aspect Ratio Plugin for Tailwind CSS
+# Aspect Ratio Plugin for Tailwind CSS (pseudo-element version)
 
 ## Requirements
 
@@ -7,7 +7,7 @@ This plugin requires Tailwind CSS 1.2 or later. If your project uses an older ve
 ## Installation
 
 ```bash
-npm install tailwindcss-aspect-ratio
+npm install tailwindcss-aspect-ratio-pseudo
 ```
 
 ## Usage
@@ -60,8 +60,7 @@ The above configuration would create the following classes, as well as their res
 Which you can then use in your HTML like this:
 
 ```html
-<div class="relative">
-  <div class="aspect-ratio-16/9"></div>
+<div class="relative aspect-ratio aspect-ratio-16/9">
   <img src="thumbnail.jpg" class="absolute left-0 top-0 w-full h-full object-cover">
 </div>
 ```
@@ -69,8 +68,17 @@ Which you can then use in your HTML like this:
 Or inside a `flex` container to behave like a “minimum aspect ratio” (if the content overflows, the container will grow instead of forcing the aspect ratio):
 
 ```html
-<div class="flex bg-gray-300">
-  <div class="aspect-ratio-2/1"></div>
+<div class="flex bg-gray-300 aspect-ratio aspect-ratio-2/1">
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sed dictum sem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas et lacus ut dolor rutrum dignissim.
+  </p>
+</div>
+```
+
+Or on a non-`flex` element and still behave like a “minimum aspect ratio”:
+
+```html
+<div class="bg-gray-300 aspect-ratio min-h-aspect-ratio-2/1">
   <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sed dictum sem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas et lacus ut dolor rutrum dignissim.
   </p>
