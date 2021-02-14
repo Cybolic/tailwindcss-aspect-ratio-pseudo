@@ -1,16 +1,16 @@
 const plugin = require('tailwindcss/plugin');
 const _ = require('lodash');
 
-module.exports = plugin(function({ theme, variants, e, addUtilities }) {
+module.exports = plugin(function({ theme, variants, e, addComponents }) {
   const themeRatios = theme('aspectRatio');
-  let aspectRatioUtilities = {};
+  let aspectRatioBase = {};
   if (Object.keys(themeRatios).length !== 0) {
-    aspectRatioUtilities = {
+    aspectRatioBase = {
         // aspect-ratio
       '.aspect-ratio': {
         position: 'relative'
       },
-      '.aspect-ratio::before': {
+      '.aspect-ratio:before': {
         content: '""',
         display: 'block'
       },
@@ -25,14 +25,14 @@ module.exports = plugin(function({ theme, variants, e, addUtilities }) {
         height: 'auto'
       },
       // min-h-aspect-ratio
-      '.min-h-aspect-ratio::before': {
+      '.min-h-aspect-ratio:before': {
         content: '""',
         width: '1px',
         marginLeft: '-1px',
         float: 'left',
         height: 0
       },
-      '.min-h-aspect-ratio::after': { /* to clear float */
+      '.min-h-aspect-ratio:after': { /* to clear float */
         content: '""',
         display: 'table',
         clear: 'both'
@@ -45,7 +45,7 @@ module.exports = plugin(function({ theme, variants, e, addUtilities }) {
         const aspectRatio = _.isArray(value) ? value[0] / value[1] : value;
         return [
           [
-            `.${e(`aspect-ratio-${modifier}`)}::before`, {
+            `.${e(`aspect-ratio-${modifier}`)}:before`, {
               paddingBottom: aspectRatio == 0 ? '0' : `${1 / aspectRatio * 100}%`,
             }
           ]
@@ -54,7 +54,7 @@ module.exports = plugin(function({ theme, variants, e, addUtilities }) {
     )
   );
 
-  addUtilities([ aspectRatioUtilities, aspectRatioModifiers ], variants('aspectRatio'));
+  addComponents([ aspectRatioBase, aspectRatioModifiers ], variants('aspectRatio'));
 }, {
   theme: {
     aspectRatio: {},
